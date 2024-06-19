@@ -24,7 +24,6 @@
 }
 #side-panel  
 {
-    border:2px solid green;
     height: 100%;
     max-height: fit-content;
 }
