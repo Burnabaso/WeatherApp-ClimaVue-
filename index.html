@@ -6,10 +6,43 @@
     <meta name="author" content="Ibrahim Itani">
     <title>ClimaVue | Your Weather Companion</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="Resources/favicon.png" type="image/x-icon">
 </head>
 <body>
-    
+    <div id="screen-frame">
+        <div id="side-panel">
+            <div id="search-bar" class="form-item">
+                <input id="city-search" type="text" placeholder="Beirut, Berlin, Tokyo">
+                <img id="search-icon" src="Resources/search-icon.png" alt="">
+            </div>
+            <div id="weather-img" class="side-panel-item">
+                <img src="https://www.accuweather.com/images/weathericons/1.svg" alt="Weather Icon">
+            </div>
+            <div id="temp" class="side-panel-item">
+                <p id="temp-val">
+                    <span class="value">0</span>
+                    ° 
+                    <span class="unit">C</span>
+                </p>
+                <p id="condition"> lorem </p>
+            </div>
+            <hr class="side-panel-item">
+            <div id="date-container" class="side-panel-item">
+                <p id="date">Lorem.</p>
+                <p id="day-time">Lorem, ipsum dolor.</p>
+                <p id="day-night">Day</p>
+            </div>
+            <div id="location" class="side-panel-item">
+                <h3>Lorem, ipsum.</h3>
+            </div>
+        </div>  
+        <div id="main-panel">
+
+        </div> 
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
