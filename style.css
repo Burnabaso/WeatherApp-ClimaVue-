@@ -75,7 +75,8 @@
 }
 #weather-img
 {
-    width: 30%;
+
+    width: 35%;
 }    
 #weather-img img
 {
@@ -93,6 +94,7 @@
 #condition
 {
     font-size: 2em;
+    width: 90%
 }
 #date-container p 
 {
@@ -108,6 +110,24 @@
     font-weight: lighter;
     font-size: 2.5em;
 }
+#sunset-container
+{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 60%;
+    
+}
+#sunset-img
+{
+    object-fit: contain;
+    width:20%;
+    
+}
+.day-night-item
+{
+    align-self: center;
+}
+
 #main-panel 
 {
     border: 2px solid red;
