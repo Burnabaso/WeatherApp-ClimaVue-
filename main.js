@@ -2,7 +2,7 @@
 var apiKey = "6dad0cf0600187d4acab4b62e7bc9023";
 var city;
 async function getCityCoordinates(city, apiKey) {
-  let geoCodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
+  let geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
   let georesponse = await fetch(geoCodeUrl);
   let geodata = await georesponse.json();
   console.log("City Coordinates: ", geodata);
