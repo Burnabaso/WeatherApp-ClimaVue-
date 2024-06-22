@@ -127,15 +127,73 @@
 {
     align-self: center;
 }
-
-#main-panel 
-{
-    border: 2px solid red;
-}
 hr{
     width: 60%;
     margin: auto;
 }
+
+#main-panel 
+{
+    padding-top: 1em;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-wrap: wrap;
+}
+.data-container
+{
+    background-color: var(--widget-color);
+    color: var(--primary-side-color);
+    font-weight: normal;
+    width: 95%;
+    margin-inline: auto;
+    border-radius: 1em;
+    padding: 1em 0 1em 1em;
+    margin-bottom: 1em;
+}
+.data-container:hover
+{
+    scale: 1.01;
+}
+.data-container *
+{
+    font-weight: normal ;
+}
+.temp-container 
+{
+    width: 60%;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 1em;
+}
+.temp-container img
+{
+    object-fit: contain;
+    width: 15%;
+}
+.temp-container h3
+{
+    align-content: center;
+}
+footer
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-inline: auto;
+}
+footer a
+{
+    text-decoration: none;
+}
+footer a:hover
+{
+    color: var(--call-to-action-1);
+}
+footer p 
+{
+    text-align: center;
+}
+
 @media screen and (min-width: 660px) {
     #side-panel,#main-panel
     {
@@ -151,7 +209,37 @@ hr{
     #main-panel
     {
         width: 70%;
+        gap: 0.1em;
+        padding-inline: 1em;
     }
+    .data-container
+    {
+        width: 30%;
+        box-sizing: content-box;
+        font-size: 1.3em;
+    }
+    .temp-container img
+    {
+        width: 30%;
+    }
+    footer
+    {
+        width: 100%;
+        margin-inline:0;
+    }
+    footer p 
+    {
+        width: 50%;
+    }
+    #data-source
+    {
+        text-align: start;
+    }
+    #dev
+    {
+        text-align: end;
+    }
+   
 }
 @media screen and (min-width:1300px) {
     #screen-frame

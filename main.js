@@ -24,7 +24,7 @@ async function getWeatherData(lat, lon, apiKey) {
   let oneCallData = await oneCallResponse.json();
   console.log("Current Weather: ",oneCallData);
   let weatherDescription = oneCallData.weather[0].description;
-  let weatherTemperature = oneCallData.main.feels_like;
+  let weatherTemperature = oneCallData.main.temp;
   let tempRound = Math.round(weatherTemperature);
   console.log(typeof weatherTemperature);
   let Sunset = oneCallData.sys.sunset;

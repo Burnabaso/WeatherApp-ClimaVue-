@@ -15,7 +15,7 @@
     <div id="screen-frame">
         <div id="side-panel">
             <div id="search-bar" class="form-item">
-                <input id="city-search" type="text" placeholder="Beirut, Berlin, Tokyo">
+                <input id="city-search" type="text" placeholder="Beirut, Berlin, ...">
                 <img id="search-icon" src="Resources/search-icon.png" alt="">
             </div>
             <div id="weather-img" class="side-panel-item">
@@ -40,7 +40,59 @@
             </div>
         </div>  
         <div id="main-panel">
-
+            <div class="data-container" id="wind-container">
+                <h4>Wind</h4>
+                <h2><span id="wind-speed">Nan</span><span> Km/h</span></h2>
+                <h4 id="wind-direction">lorem</h4>
+            </div>
+            <div class="data-container" id="humidity-container">
+                <h4>Humidity</h4>
+                <h2><span id="humidity">Nan</span><span> %</span></h2>
+                
+            </div>
+            <div class="data-container" id="realfeel-container">
+                <h4>Real Feel</h4>
+                <h3><span id="feel-temp">Nan</span><span> °C</span></h3>
+                
+            </div>
+            <div class="data-container" id="coordinates-container">
+                <h4>Coordinates</h4>
+                <h3><span id="lon">Nan</span><span> °</span></h3>
+                <h3><span id="lat">Nan</span><span> °</span></h3>
+            </div>
+            <div class="data-container" id="pressure-container">
+                <h4>Pressure</h4>
+                <h3><span id="pressure">Nan</span><span> hPa</span></h3>
+                <h4>At Sea Level</h4>
+            </div>
+            <div class="data-container" id="rain-container">
+                <h4>Volume of Rain</h4>
+                <h3><span id="rain-volume">Nan</span><span> mm</span></h3>
+                <h4 id="rain-time">lorem</h4>
+            </div>
+            <div class="data-container" id="temp-hist-container">
+                <h4 style="margin-bottom: 1em;">Temperature History</h4>
+                <div id="max-temp-container" class="temp-container">
+                    <img src="Resources/up-arrow.png" alt="maximum temperature">
+                    <h3><span id="max-temp">Nan</span><span> °C</span></h3>
+                </div>
+                <div id="min-temp-container" class="temp-container">
+                    <img src="Resources/down-arrow.png" alt="minimum temperature">
+                    <h3><span id="min-temp">Nan</span><span> °C</span></h3>
+                </div>
+            </div>
+            <div class="data-container" id="sunrise-container">
+                <h4>Sunrise</h4>
+                <h3 id="sunrise-time">00:00</h3>
+            </div>
+            <div class="data-container" id="clouds-container">
+                <h4>Clouds</h4>
+                <h3><span id="clouds-%">Nan</span><span> %</span></h3>
+            </div>
+            <footer>
+               <p id="data-source">All Data Provided by: <a href="https://openweathermap.org/">OpenWeather</a></p>
+               <p id="dev">Developed by: <a href="https://github.com/Burnabaso">Ibrahim Itani</a></p>
+            </footer>
         </div> 
     </div>
     <script src="main.js"></script>
