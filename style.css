@@ -24,7 +24,7 @@
 }
 #side-panel  
 {
-    height: 100%;
+    
     max-height: fit-content;
 }
 #side-panel *
@@ -248,7 +248,7 @@ footer p
         border:2px solid var(--widget-color);
         box-shadow: 0.2em 0.2em 0.5em var(--call-to-action-2),0.4em 0.4em 1em var(--call-to-action-1);
         margin-inline: auto;   
-        height: 100vh;
+       
     }
     #main-panel 
     {
