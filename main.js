@@ -23,16 +23,16 @@ const locationContainer = document.getElementById("location-name");
 const dateContainer = document.getElementById("date");
 
 async function getCityCoordinates(city, apiKey) {
-  let georesponse,geodata;
+  let geoResponse,geoData;
   const geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
-  georesponse = await fetch(geoCodeUrl);
-  geodata = await georesponse.json();
-  if (geodata.length > 0) {
+  geoResponse = await fetch(geoCodeUrl);
+  geoData = await geoResponse.json();
+  if (geoData.length > 0) {
     return {
-      lat: geodata[0].lat,
-      lon: geodata[0].lon,
-      country: geodata[0].country,
-      cityName: geodata[0].name,
+      lat: geoData[0].lat,
+      lon: geoData[0].lon,
+      country: geoData[0].country,
+      cityName: geoData[0].name,
     };
   } else {
     alert("Incorrect Name of City, Please Try Again");
@@ -80,19 +80,19 @@ async function getWeatherData(lat, lon, apiKey) {
     description: weatherDescription,
     temp: tempRound,
     sunset: sunsetTimeString,
-    sunrise:sunriseTimeString,
+    sunrise: sunriseTimeString,
     icon: iconCode,
     windS: windSpeedConverted,
     windDirect: windDirection,
     humid: humidity,
     feels_like: reelFeel,
-    long:longitude,
-    lati:latitude,
-    press:pressure,
-    rainVol:rainVolume,
-    max:maxTemp,
-    min:minTemp,
-    cloudPercent:cloud
+    long: longitude,
+    lati: latitude,
+    press: pressure,
+    rainVol: rainVolume,
+    max: maxTemp,
+    min: minTemp,
+    cloudPercent: cloud
   };
 }
 function convertDegToDirection(windDegree) {
