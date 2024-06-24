@@ -1,6 +1,27 @@
 // Store city input by user
 var apiKey = "6dad0cf0600187d4acab4b62e7bc9023";
 var city;
+const windSpeedContainer = document.getElementById("wind-speed");
+const windDirectContainer = document.getElementById("wind-direction");
+const humidityContainer = document.getElementById("humidity");
+const feelLikeContainer = document.getElementById("feel-temp");
+const lonContainer = document.getElementById("lon");
+const latContainer = document.getElementById("lat");
+const pressureContainer = document.getElementById("pressure");
+const maxTempContainer = document.getElementById("max-temp");
+const minTempContainer = document.getElementById("min-temp");
+const sunriseTimeContainer = document.getElementById("sunrise-time");
+const cloudsContainer = document.getElementById("clouds-%");
+const tempValueContainer = document.getElementById("temp-value");
+const conditionContainer = document.getElementById("condition");
+const sunsetContainer = document.getElementById("sunset");
+const iconContainer = document.getElementById("weather-icon");
+const dayOfWeekContainer = document.getElementById("day-of-week");
+const timeContainer = document.getElementById("time");
+const dayInMonthContainer = document.getElementById("day-in-month");
+const locationContainer = document.getElementById("location-name");
+const dateContainer = document.getElementById("date");
+
 async function getCityCoordinates(city, apiKey) {
   let geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
   let georesponse = await fetch(geoCodeUrl);
@@ -140,60 +161,39 @@ async function getTime(lat, lon) {
     DayNumber: timeData.day,
   };
 }
-document
-  .getElementById("city-search")
-  .addEventListener("keydown", function (event) {
+document.getElementById("city-search").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
       city = event.target.value;
 
-      getCityCoordinates(city, apiKey)
-        .then((coord) => getWeatherData(coord.lat, coord.lon, apiKey))
-        .then((weatherData) => {
-          document.getElementById(
-            "temp-value"
-          ).innerText = `${weatherData.temp}`;
-          document.getElementById(
-            "condition"
-          ).innerText = `${weatherData.description}`;
-          document.getElementById(
-            "day-night"
-          ).innerText = `${weatherData.sunset}`;
-          document
-            .getElementById("weather-icon")
-            .setAttribute(
-              "src",
-              `https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`
-            );
-            document.getElementById("wind-speed").innerText=`${weatherData.windS}`;
-            document.getElementById("wind-direction").innerText=`${weatherData.windDirect}`;
-            document.getElementById("humidity").innerText=`${weatherData.humid}`;
-            document.getElementById("feel-temp").innerText=`${weatherData.feels_like}`;
-            document.getElementById("lon").innerText=`${weatherData.long}`;
-            document.getElementById("lat").innerText=`${weatherData.lati}`;
-            document.getElementById("pressure").innerText=`${weatherData.press}`;
-            document.getElementById("max-temp").innerText=`${weatherData.max}`;
-            document.getElementById("min-temp").innerText=`${weatherData.min}`;
-            document.getElementById("sunrise-time").innerText=`${weatherData.sunrise}`;
-            document.getElementById("clouds-%").innerText=`${weatherData.cloudPercent}`;
-
+      getCityCoordinates(city, apiKey).then((coord) => getWeatherData(coord.lat, coord.lon, apiKey)).then((weatherData) => {
+          tempValueContainer.innerText = `${weatherData.temp}`;
+          conditionContainer.innerText = `${weatherData.description}`;
+          sunsetContainer.innerText = `${weatherData.sunset}`;
+          iconContainer.setAttribute("src",`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`);
+          windSpeedContainer.innerText=`${weatherData.windS}`;
+          windDirectContainer.innerText=`${weatherData.windDirect}`;
+          humidityContainer.innerText=`${weatherData.humid}`;
+          feelLikeContainer.innerText=`${weatherData.feels_like}`;
+          lonContainer.innerText=`${weatherData.long}`;
+          latContainer.innerText=`${weatherData.lati}`;
+          pressureContainer.innerText=`${weatherData.press}`;
+          maxTempContainer.innerText=`${weatherData.max}`;
+          minTempContainer.innerText=`${weatherData.min}`;
+          sunriseTimeContainer.innerText=`${weatherData.sunrise}`;
+          cloudsContainer.innerText=`${weatherData.cloudPercent}`;
         });
 
-      getCityCoordinates(city, apiKey)
-        .then((cordinates) => getTime(cordinates.lat, cordinates.lon))
-        .then((timedata) => {
-          document.getElementById("day-of-week").innerText = `${timedata.Day}`;
-          document.getElementById("time").innerText = `${timedata.Time}`;
-          document.getElementById(
-            "day-in-month"
-          ).innerText = `${timedata.DayNumber}`;
-        });
-      getCityCoordinates(city, apiKey).then((coordinates) => {
-        document.getElementById(
-          "location-name"
-        ).innerText = `${coordinates.cityName}, ${coordinates.country}`;
+      getCityCoordinates(city, apiKey).then((coordinates) => getTime(coordinates.lat, coordinates.lon)).then((timedata) => {
+          dayOfWeekContainer.innerText = `${timedata.Day}`;
+          timeContainer.innerText = `${timedata.Time}`;
+          dayInMonthContainer.innerText = `${timedata.DayNumber}`;
       });
+      getCityCoordinates(city, apiKey).then((coordinates) => {
+          locationContainer.innerText = `${coordinates.cityName}, ${coordinates.country}`;
+      });
+
       let Date = getDate();
-      document.getElementById("date").innerText = Date;
+      dateContainer.innerText = Date;
     }
   });
