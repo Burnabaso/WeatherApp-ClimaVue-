@@ -26,7 +26,6 @@ async function getCityCoordinates(city, apiKey) {
   let geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
   let georesponse = await fetch(geoCodeUrl);
   let geodata = await georesponse.json();
-  console.log("City Coordinates: ", geodata);
   if (geodata.length > 0) {
     return {
       lat: geodata[0].lat,
@@ -43,12 +42,14 @@ async function getWeatherData(lat, lon, apiKey) {
   let oneCallUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   let oneCallResponse = await fetch(oneCallUrl);
   let oneCallData = await oneCallResponse.json();
-  console.log("Current Weather: ", oneCallData);
+  //Extracting Data from the API JSON response
   let weatherDescription = oneCallData.weather[0].description;
   let weatherTemperature = oneCallData.main.temp;
   let tempRound = Math.round(weatherTemperature);
   let windSpeed = oneCallData.wind.speed;
+  //Converted windSpeed from m/s to km/hr
   let windSpeedConverted = Math.round(3.6 * windSpeed);
+  //converted the wind degree to direction (N,S,NE,...)
   let windDegree = oneCallData.wind.deg;
   let windDirection = convertDegToDirection(windDegree);
   let humidity = oneCallData.main.humidity;
@@ -62,7 +63,7 @@ async function getWeatherData(lat, lon, apiKey) {
   let sunRise = oneCallData.sys.sunrise;
   let sunriseTime = new Date(sunRise * 1000);
   let SunriseTimeString = sunriseTime.toLocaleTimeString("en-US", timeOptions);
-
+  //fetching weather condition icon code to add to the url to fetch the image 
   let iconCode = oneCallData.weather[0].icon;
   let longitude = oneCallData.coord.lon;
   let latitude = oneCallData.coord.lat;
