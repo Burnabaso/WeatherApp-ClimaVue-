@@ -23,9 +23,10 @@ const locationContainer = document.getElementById("location-name");
 const dateContainer = document.getElementById("date");
 
 async function getCityCoordinates(city, apiKey) {
-  let geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
-  let georesponse = await fetch(geoCodeUrl);
-  let geodata = await georesponse.json();
+  let geoCodeUrl,georesponse,geodata;
+  geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
+  georesponse = await fetch(geoCodeUrl);
+  geodata = await georesponse.json();
   if (geodata.length > 0) {
     return {
       lat: geodata[0].lat,
@@ -39,39 +40,42 @@ async function getCityCoordinates(city, apiKey) {
   }
 }
 async function getWeatherData(lat, lon, apiKey) {
-  let oneCallUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  let oneCallResponse = await fetch(oneCallUrl);
-  let oneCallData = await oneCallResponse.json();
+  let oneCallUrl,oneCallResponse,oneCallData,weatherDescription,weatherTemperature,tempRound,windSpeed,windSpeedConverted,windDegree;
+  let windDirection,humidity,reelFeel,sunset,sunsetTime,timeOptions,sunsetTimeString,sunrise,sunriseTime,sunriseTimeString;
+  let iconCode,longitude,latitude,pressure,rainVolume,minTemp,maxTemp,cloud;
+  oneCallUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  oneCallResponse = await fetch(oneCallUrl);
+  oneCallData = await oneCallResponse.json();
   //Extracting Data from the API JSON response
-  let weatherDescription = oneCallData.weather[0].description;
-  let weatherTemperature = oneCallData.main.temp;
-  let tempRound = Math.round(weatherTemperature);
-  let windSpeed = oneCallData.wind.speed;
+  weatherDescription = oneCallData.weather[0].description;
+  weatherTemperature = oneCallData.main.temp;
+  tempRound = Math.round(weatherTemperature);
+  windSpeed = oneCallData.wind.speed;
   //Converted windSpeed from m/s to km/hr
-  let windSpeedConverted = Math.round(3.6 * windSpeed);
+  windSpeedConverted = Math.round(3.6 * windSpeed);
   //converted the wind degree to direction (N,S,NE,...)
-  let windDegree = oneCallData.wind.deg;
-  let windDirection = convertDegToDirection(windDegree);
-  let humidity = oneCallData.main.humidity;
-  let reelFeel = oneCallData.main.feels_like;
+  windDegree = oneCallData.wind.deg;
+  windDirection = convertDegToDirection(windDegree);
+  humidity = oneCallData.main.humidity;
+  reelFeel = oneCallData.main.feels_like;
   // sunset time is in unix unit so we convert it to 24h format
-  let Sunset = oneCallData.sys.sunset;
-  let sunsetTime = new Date(Sunset * 1000);
-  let timeOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
-  let SunsetTimeString = sunsetTime.toLocaleTimeString("en-US", timeOptions);
+  sunset = oneCallData.sys.sunset;
+  sunsetTime = new Date(Sunset * 1000);
+  timeOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
+  sunsetTimeString = sunsetTime.toLocaleTimeString("en-US", timeOptions);
   // sunrise time is in unix unit so we convert it to 24hr Format
-  let sunRise = oneCallData.sys.sunrise;
-  let sunriseTime = new Date(sunRise * 1000);
-  let SunriseTimeString = sunriseTime.toLocaleTimeString("en-US", timeOptions);
+  sunrise = oneCallData.sys.sunrise;
+  sunriseTime = new Date(sunRise * 1000);
+  sunriseTimeString = sunriseTime.toLocaleTimeString("en-US", timeOptions);
   //fetching weather condition icon code to add to the url to fetch the image 
-  let iconCode = oneCallData.weather[0].icon;
-  let longitude = oneCallData.coord.lon;
-  let latitude = oneCallData.coord.lat;
-  let pressure = oneCallData.main.pressure;
-  let rainVolume = oneCallData.rain;
-  let minTemp = oneCallData.main.temp_min;
-  let maxTemp = oneCallData.main.temp_max;
-  let cloud = oneCallData.clouds.all;
+  iconCode = oneCallData.weather[0].icon;
+  longitude = oneCallData.coord.lon;
+  latitude = oneCallData.coord.lat;
+  pressure = oneCallData.main.pressure;
+  rainVolume = oneCallData.rain;
+  minTemp = oneCallData.main.temp_min;
+  maxTemp = oneCallData.main.temp_max;
+  cloud = oneCallData.clouds.all;
   return {
     description: weatherDescription,
     temp: tempRound,
@@ -144,18 +148,20 @@ function convertDay(day_number) {
   return dayNames[day_number - 1];
 }
 function getDate() {
-  let month = new Date().getMonth() + 1;
-  let monthName = convertMonth(month);
-  let year = new Date().getFullYear();
+  let month,monthName,year;
+  month = new Date().getMonth() + 1;
+  monthName = convertMonth(month);
+  year = new Date().getFullYear();
   return `${monthName} ${year}`;
 }
 async function getTime(lat, lon) {
-  let timeUrl = `https://timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
-  let timeResponse = await fetch(timeUrl);
-  let timeData = await timeResponse.json();
+  let timeUrl,timeResponse,timeData,day,time;
+  timeUrl = `https://timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
+  timeResponse = await fetch(timeUrl);
+  timeData = await timeResponse.json();
   console.log("Time data: ", timeData);
-  let day = timeData.dayOfWeek;
-  let time = timeData.time;
+  day = timeData.dayOfWeek;
+  time = timeData.time;
   return {
     Day: day,
     Time: time,
