@@ -23,8 +23,8 @@ const locationContainer = document.getElementById("location-name");
 const dateContainer = document.getElementById("date");
 
 async function getCityCoordinates(city, apiKey) {
-  let geoCodeUrl,georesponse,geodata;
-  geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
+  let georesponse,geodata;
+  const geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
   georesponse = await fetch(geoCodeUrl);
   geodata = await georesponse.json();
   if (geodata.length > 0) {
@@ -40,10 +40,10 @@ async function getCityCoordinates(city, apiKey) {
   }
 }
 async function getWeatherData(lat, lon, apiKey) {
-  let oneCallUrl,oneCallResponse,oneCallData,weatherDescription,weatherTemperature,tempRound,windSpeed,windSpeedConverted,windDegree;
+  let oneCallResponse,oneCallData,weatherDescription,weatherTemperature,tempRound,windSpeed,windSpeedConverted,windDegree;
   let windDirection,humidity,reelFeel,sunset,sunsetTime,timeOptions,sunsetTimeString,sunrise,sunriseTime,sunriseTimeString;
   let iconCode,longitude,latitude,pressure,rainVolume,minTemp,maxTemp,cloud;
-  oneCallUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  const oneCallUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   oneCallResponse = await fetch(oneCallUrl);
   oneCallData = await oneCallResponse.json();
   //Extracting Data from the API JSON response
@@ -60,12 +60,12 @@ async function getWeatherData(lat, lon, apiKey) {
   reelFeel = oneCallData.main.feels_like;
   // sunset time is in unix unit so we convert it to 24h format
   sunset = oneCallData.sys.sunset;
-  sunsetTime = new Date(Sunset * 1000);
+  sunsetTime = new Date(sunset * 1000);
   timeOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
   sunsetTimeString = sunsetTime.toLocaleTimeString("en-US", timeOptions);
   // sunrise time is in unix unit so we convert it to 24hr Format
   sunrise = oneCallData.sys.sunrise;
-  sunriseTime = new Date(sunRise * 1000);
+  sunriseTime = new Date(sunrise * 1000);
   sunriseTimeString = sunriseTime.toLocaleTimeString("en-US", timeOptions);
   //fetching weather condition icon code to add to the url to fetch the image 
   iconCode = oneCallData.weather[0].icon;
@@ -79,8 +79,8 @@ async function getWeatherData(lat, lon, apiKey) {
   return {
     description: weatherDescription,
     temp: tempRound,
-    sunset: SunsetTimeString,
-    sunrise:SunriseTimeString,
+    sunset: sunsetTimeString,
+    sunrise:sunriseTimeString,
     icon: iconCode,
     windS: windSpeedConverted,
     windDirect: windDirection,
@@ -155,8 +155,8 @@ function getDate() {
   return `${monthName} ${year}`;
 }
 async function getTime(lat, lon) {
-  let timeUrl,timeResponse,timeData,day,time;
-  timeUrl = `https://timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
+  let timeResponse,timeData,day,time;
+  const timeUrl = `https://timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
   timeResponse = await fetch(timeUrl);
   timeData = await timeResponse.json();
   console.log("Time data: ", timeData);
